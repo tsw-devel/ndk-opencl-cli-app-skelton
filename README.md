@@ -1,13 +1,13 @@
-# Android-NDK OpenCL CLI App skelton on Android smartphones.
+# Android-NDK OpenCL CLI App skelton on Smartphone with snapdragon.
 
 ## About
-A skeleton project that runs the OpenCL command line program in the Android smartphone environment.  
+A skeleton project that runs the OpenCL command line program in Smartphone with snapdragon environment.  
 Simple OpenCL summary output program included as sample.  
 This software is released under the MIT License, see LICENSE file.
 
 
 ## Preparation
-Confirmation is done with Windows 10 Home 64bit.
+- Confirmation is done with Windows 10 Home 64bit.
 
 ### Install Platform Tools
 
@@ -30,7 +30,7 @@ Store OpenCL-Headers project under jni direcotry.
 
 
 ### Get libOpenCL.so
-Get OpenCL Libraries(libOpenCL.so) from smartphone and store them in vendor/lib, vendor/lib64.
+Get OpenCL Libraries(libOpenCL.so) from smartphone and store them in jni/vendor/lib, jni/vendor/lib64.
 #### Example
 In this example, I use Asus Zenfone 3 MAX.
 

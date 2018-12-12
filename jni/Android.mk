@@ -1,6 +1,6 @@
 # ==============================================================================
 # 
-# Android.mk for Android-NDK OpenCL CLI App skelton on Android smartphones.
+# Android.mk for Android-NDK OpenCL CLI App skelton on Smartphone with Snapdragon.
 #
 # ==============================================================================
 LOCAL_PATH := $(call my-dir)

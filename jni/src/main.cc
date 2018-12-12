@@ -1,5 +1,5 @@
 /**
- * Android-NDK OpenCL CLI App skelton on Android smartphones.
+ * Android-NDK OpenCL CLI App skelton on Smartphone with Snapdragon.
  * Sample : OpenCL device summary program
  */
 #include <iostream>
@@ -31,8 +31,8 @@ constexpr cl_query_info<cl_device_info> kDeviceInfoQueryArrayTable[] = {
 };
 
 int query_cl_device_sumary(cl_device_type device_type) {
-  char query_buf[1024];
-  constexpr std::ostream &kMsgout = std::cout;
+  char query_buf[1024] = {0};
+  constexpr std::ostream &kMsgOut = std::cout;
   constexpr std::ostream &kErrOut = std::cerr;
   constexpr int kQueryError = -1;
   
@@ -63,7 +63,7 @@ int query_cl_device_sumary(cl_device_type device_type) {
         kErrOut << "clGetPlatformInfo(" << query.name << ") : error" << std::endl;
         return kQueryError;
       }
-      kMsgout << query.name << "\t" << query_buf << std::endl;
+      kMsgOut << query.name << "\t" << query_buf << std::endl;
     }
 
     // Query device num
@@ -74,7 +74,7 @@ int query_cl_device_sumary(cl_device_type device_type) {
       return kQueryError;
     }
     std::vector<cl_device_id> device_ids(device_num);
-    kMsgout << "CL DEVICE NUM \t\t" << device_num << std::endl;
+    kMsgOut << "CL DEVICE NUM \t\t" << device_num << std::endl;
     status = clGetDeviceIDs(pfid, CL_DEVICE_TYPE_ALL, device_num,
                             &device_ids.front(), &device_num);
     // Enumerate devices
@@ -86,7 +86,7 @@ int query_cl_device_sumary(cl_device_type device_type) {
           kErrOut << "clGetDeviceInfo(" << query.name << ") : error" << std::endl;
           return kQueryError;
         }
-        kMsgout << query.name << "\t" << query_buf << std::endl;
+        kMsgOut << query.name << "\t" << query_buf << std::endl;
       }
 
       // Query NDRange
@@ -107,22 +107,22 @@ int query_cl_device_sumary(cl_device_type device_type) {
         kErrOut << "clGetDeviceInfo(CL_DEVICE_MAX_WORK_ITEM_SIZES) : error" << std::endl;
         return kQueryError;
       }
-      kMsgout << "CL_DEVICE_MAX_WORK_ITEM_SIZES" << "\t\t";
+      kMsgOut << "CL_DEVICE_MAX_WORK_ITEM_SIZES" << "\t\t";
       for (size_t sz : work_item_sizes) {
-        kMsgout << sz << " ";
+        kMsgOut << sz << " ";
       }
-      kMsgout << std::endl;
+      kMsgOut << std::endl;
 
       // Query SVM
       cl_device_svm_capabilities svm_caps;
       status = clGetDeviceInfo(devid, CL_DEVICE_SVM_CAPABILITIES,
                                sizeof(cl_device_svm_capabilities), &svm_caps, NULL);
-      kMsgout << std::boolalpha;
-      kMsgout << "CL_DEVICE_SVM_COARSE_GRAIN_BUFFER" << "\t" << (0 != (CL_DEVICE_SVM_COARSE_GRAIN_BUFFER & svm_caps)) << std::endl;
-      kMsgout << "CL_DEVICE_SVM_FINE_GRAIN_BUFFER" << "\t\t" << (0 != (CL_DEVICE_SVM_FINE_GRAIN_BUFFER & svm_caps)) << std::endl;
-      kMsgout << "CL_DEVICE_SVM_FINE_GRAIN_SYSTEM" << "\t\t" << (0 != (CL_DEVICE_SVM_FINE_GRAIN_SYSTEM & svm_caps)) << std::endl;
-      kMsgout << "CL_DEVICE_SVM_ATOMICS" << "\t\t\t" << (0 != (CL_DEVICE_SVM_ATOMICS & svm_caps)) << std::endl;
-      kMsgout << std::noboolalpha;
+      kMsgOut << std::boolalpha;
+      kMsgOut << "CL_DEVICE_SVM_COARSE_GRAIN_BUFFER" << "\t" << (0 != (CL_DEVICE_SVM_COARSE_GRAIN_BUFFER & svm_caps)) << std::endl;
+      kMsgOut << "CL_DEVICE_SVM_FINE_GRAIN_BUFFER" << "\t\t" << (0 != (CL_DEVICE_SVM_FINE_GRAIN_BUFFER & svm_caps)) << std::endl;
+      kMsgOut << "CL_DEVICE_SVM_FINE_GRAIN_SYSTEM" << "\t\t" << (0 != (CL_DEVICE_SVM_FINE_GRAIN_SYSTEM & svm_caps)) << std::endl;
+      kMsgOut << "CL_DEVICE_SVM_ATOMICS" << "\t\t\t" << (0 != (CL_DEVICE_SVM_ATOMICS & svm_caps)) << std::endl;
+      kMsgOut << std::noboolalpha;
     }
   }
   return 0;
