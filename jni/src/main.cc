@@ -17,13 +17,13 @@ struct cl_query_info {
 };
 
 #define query_data(name)  { #name, name }
-constexpr cl_query_info<cl_platform_info> kPlatformsInfoQueryTable[] = {
+constexpr cl_query_info<cl_platform_info> kPlatformInfoQueryTable[] = {
     query_data(CL_PLATFORM_VENDOR), query_data(CL_PLATFORM_NAME),
     // query_data(CL_PLATFORM_VERSION),
     // query_data(CL_PLATFORM_PROFILE),
     // query_data(CL_PLATFORM_EXTENSIONS)
 };
-constexpr cl_query_info<cl_device_info> kDeviceInfoQueryArrayTable[] = {
+constexpr cl_query_info<cl_device_info> kDeviceInfoQueryTable[] = {
     query_data(CL_DEVICE_NAME),    query_data(CL_DRIVER_VERSION),
     query_data(CL_DEVICE_PROFILE), query_data(CL_DEVICE_VERSION),
     // query_data(CL_DEVICE_OPENCL_C_VERSION),
@@ -57,7 +57,7 @@ int query_cl_device_sumary(cl_device_type device_type) {
   // Enumerate platforms
   for (const auto &pfid : platform_ids) {
     // Query platform char[] info
-    for (const auto &query : kPlatformsInfoQueryTable) {
+    for (const auto &query : kPlatformInfoQueryTable) {
       status = clGetPlatformInfo(pfid, query.val, sizeof(query_buf), query_buf, NULL);
       if (status != CL_SUCCESS) {
         kErrOut << "clGetPlatformInfo(" << query.name << ") : error" << std::endl;
@@ -80,7 +80,7 @@ int query_cl_device_sumary(cl_device_type device_type) {
     // Enumerate devices
     for (const auto &devid : device_ids) {
       // Query device char[] info
-      for (const auto &query : kDeviceInfoQueryArrayTable) {
+      for (const auto &query : kDeviceInfoQueryTable) {
         status = clGetDeviceInfo(devid, query.val, sizeof(query_buf), query_buf, NULL);
         if (status != CL_SUCCESS) {
           kErrOut << "clGetDeviceInfo(" << query.name << ") : error" << std::endl;
